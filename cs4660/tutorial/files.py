@@ -19,7 +19,7 @@ class SimpleFile(object):
         """
         sum = 0
         for i in self.numbers[line_number]:
-            sum += i
+            sum += float(i)
         return sum/len(self.numbers[line_number])
 
     def get_max(self, line_number):
@@ -53,5 +53,4 @@ class SimpleFile(object):
         for i in self.numbers[line_number]:
             sum += i
         return sum
-
 
