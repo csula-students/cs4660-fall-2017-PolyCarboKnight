@@ -128,6 +128,8 @@ class AdjacencyList(object):
             return False
 
     def add_edge(self, edge):
+        if edge.from_node not in self.adjacency_list or edge.to_node not in self.adjacency_list:
+            return False
         if edge in self.adjacency_list[edge.from_node]:
             return False
         else:
@@ -135,6 +137,8 @@ class AdjacencyList(object):
             return True
 
     def remove_edge(self, edge):
+        if edge.from_node not in self.adjacency_list or edge.to_node not in self.adjacency_list:
+            return False
         if edge in self.adjacency_list[edge.from_node]:
             self.adjacency_list[edge.from_node].remove(edge)
             return True
