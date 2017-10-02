@@ -145,6 +145,9 @@ class AdjacencyList(object):
         else:
             return False
 
+    def distance(self, node_1, node_2):
+        pass
+
 class AdjacencyMatrix(object):
     def __init__(self):
         # adjacency_matrix should be a two dimensions array of numbers that
@@ -218,6 +221,9 @@ class AdjacencyMatrix(object):
             self.adjacency_matrix[index_from_node][index_to_node] = None
             return True
 
+    def distance(self, node_1, node_2):
+        pass
+
     def __get_node_index(self, node):
         """helper method to find node index"""
         return self.nodes.index(node)
@@ -272,3 +278,6 @@ class ObjectOriented(object):
             return True
         else:
             return False
+
+    def distance(self, node_1, node_2):
+        pass
