@@ -35,9 +35,13 @@ def parse_grid_file(graph, file_path):
 
     Returns graph object
     """
-    # TODO: read the filepaht line by line to construct nodes & edges
+    # TODO: read the filepath line by line to construct nodes & edges
 
     # TODO: for each node/edge above, add it to graph
+
+    # ---test code----
+    # test_node = graph.Node(Tile(1, 22, " "))
+    # print(test_node)
 
     return graph
 
