@@ -40,7 +40,27 @@ def dfs(graph, initial_node, dest_node):
     uses graph to do search from the initial_node to dest_node
     returns a list of actions going from the initial node to dest_node
     """
-    pass
+    parents = {}
+    visited = []
+
+    dfs_tracepath(graph, initial_node, visited, parents)
+
+    path = []
+    temp_node = dest_node
+
+    while temp_node != initial_node:
+        path.append(g.Edge(parents[temp_node], temp_node, graph.distance(parents[temp_node], temp_node)))
+        temp_node = parents[temp_node]
+
+    path.reverse()
+    return path
+
+def dfs_tracepath(graph, node, visited, parents):
+    for neighbor in graph.neighbors(node):
+        if neighbor not in visited:
+            visited.append(neighbor)
+            parents[neighbor] = node
+            dfs_tracepath(graph, neighbor, visited, parents)
 
 def dijkstra_search(graph, initial_node, dest_node):
     """
