@@ -180,7 +180,7 @@ class AdjacencyMatrix(object):
             index = self.__get_node_index(node)
             for num in range(len(self.adjacency_matrix[index])):
                 if self.adjacency_matrix[index][num] is not None:
-                    neighboring_nodes.append(Node(num))
+                    neighboring_nodes.append(self.nodes[num])
             return neighboring_nodes
         else:
             return neighboring_nodes

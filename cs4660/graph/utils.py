@@ -26,7 +26,9 @@ class Tile(object):
     def __hash__(self):
         return hash(str(self.x) + "," + str(self.y) + self.symbol)
 
-
+from graph import graph as g
+from .graph import Node
+from .graph import Edge
 
 def parse_grid_file(graph, file_path):
     """
@@ -35,15 +37,38 @@ def parse_grid_file(graph, file_path):
 
     Returns graph object
     """
-    # TODO: read the filepath line by line to construct nodes & edges
+    with open(file_path) as file:
+        lines = file.readlines()
+        maze = []
+        for line in lines:
+            if len(line) > 0:
+                maze.append([line[i:i + 2] for i in range(1, len(line[1:-1]), 2)])
+        maze = maze[1:-1]
 
-    # TODO: for each node/edge above, add it to graph
+    nodes = {}
 
-    # ---test code----
-    # test_node = graph.Node(Tile(1, 22, " "))
-    # print(test_node)
+    for y in range(len(maze)):
+        for x in range(len(maze[0])):
+            node = Tile(x, y, maze[y][x])
+            graph.add_node(Node(node))
+            nodes[(x, y)] = node
+
+    for y in range(len(maze)):
+        for x in range(len(maze[0])):
+            current_node = Tile(x, y, maze[y][x])
+
+            if current_node.symbol != "##":
+                if (x + 1, y) in nodes:
+                    graph.add_edge(Edge(Node(current_node), Node(nodes[(x + 1, y)]), 1))
+                if (x - 1, y) in nodes:
+                    graph.add_edge(Edge(Node(current_node), Node(nodes[(x - 1, y)]), 1))
+                if (x, y + 1) in nodes:
+                    graph.add_edge(Edge(Node(current_node), Node(nodes[(x, y + 1)]), 1))
+                if (x, y - 1) in nodes:
+                    graph.add_edge(Edge(Node(current_node), Node(nodes[(x, y - 1)]), 1))
 
     return graph
+
 
 def convert_edge_to_grid_actions(edges):
     """
@@ -51,4 +76,19 @@ def convert_edge_to_grid_actions(edges):
 
     e.g. Edge(Node(Tile(1, 2), Tile(2, 2), 1)) => "S"
     """
-    return ""
+    route = ''
+
+    if not edges:
+        return ''
+
+    for edge in edges:
+        if edge.from_node.data.x > edge.to_node.data.x:
+            route += 'W'
+        elif edge.from_node.data.x < edge.to_node.data.x:
+            route += 'E'
+        elif edge.from_node.data.y > edge.to_node.data.y:
+            route += 'N'
+        elif edge.from_node.data.y < edge.to_node.data.y:
+            route += 'S'
+
+    return route
