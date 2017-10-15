@@ -26,7 +26,6 @@ class Tile(object):
     def __hash__(self):
         return hash(str(self.x) + "," + str(self.y) + self.symbol)
 
-from graph import graph as g
 from .graph import Node
 from .graph import Edge
 
