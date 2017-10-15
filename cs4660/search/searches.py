@@ -1,9 +1,14 @@
 """
 Searches module defines all different search algorithms
 """
-import queue
 import sys
 from graph import graph as g
+
+# import queue for Python 2 and 3
+try:
+    import Queue as queue
+except ImportError:
+    import queue
 
 def bfs(graph, initial_node, dest_node):
     """

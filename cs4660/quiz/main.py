@@ -12,7 +12,12 @@ TODO: implement Dijkstra utilizing the path with highest effect number
 
 import json
 import codecs
-import queue
+
+# import queue for Python 2 and 3
+try:
+    import Queue as queue
+except ImportError:
+    import queue
 
 # http lib import for Python 2 and 3: alternative 4
 try:
